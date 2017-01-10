@@ -1,0 +1,21 @@
+CHANGELOG for the dkim_policy.pl script
+========================================
+
+The changes can be also viewed by running the script on the command line.
+with the option --changelog.
+
+dkim_policy.pl  DKIM Policy Checker v1.02 (2017-01-10)
+  Written by Ivo Truxa (c) 2017 <truxa@truxoft.com>
+
+  1.02 [Ivo Truxa] 2017/01/10
+       - return code 0 (enforced) or 1 (undefined) kept, but STDOUT prints a verbose result
+  1.01 [Ivo Truxa] 2017/01/09
+       - inversed output - 0: success = DKIM signing enforced
+       -                   1: error = policy undefined or signing not enforced
+       - policy loop interrupted at the 1st hit, to save time, processing power, and bandwidth
+       - full policy loop for detailed verbose mode kept
+       - cosmetic formatting changes, editing of help texts
+  1.00 [Ivo Truxa] 2017/01/08
+       - this tool was written on FreeBSD, using Perl module Mail-DKIM-0.40 and Perl5-24
+       - at this date, it was not tested on other platforms or with other versions of Perl
+Press any key to continue...
