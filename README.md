@@ -166,7 +166,7 @@ acl_check_dkim:
 #       logwrite        = DKIM DEBUG 11: ERR=$acl_m_dklog
 
   # Deny missing signatures at important known signers, frequently used domains,
-  # and at local domains (except of podzimek.cz!)
+  # and at local domains (except of someexception.com,...)
   # (by doing so here, we save some excess processing time and bandwidth
   #  needed for frequent DNS TXT lookups in the next section)
   deny  message         = DKIM signature missing! The policy of the domain $sender_address_domain enforces DKIM signatures on all email.
