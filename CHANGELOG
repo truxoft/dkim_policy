@@ -18,4 +18,3 @@ dkim_policy.pl  DKIM Policy Checker v1.02 (2017-01-10)
   1.00 [Ivo Truxa] 2017/01/08
        - this tool was written on FreeBSD, using Perl module Mail-DKIM-0.40 and Perl5-24
        - at this date, it was not tested on other platforms or with other versions of Perl
-Press any key to continue...
