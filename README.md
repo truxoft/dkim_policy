@@ -3,13 +3,13 @@ dkim_policy
 
 #### Query DKIM signing policies of a domain
 
-This script was written to allow better exploting the possibilities of DKIM
-in Exim
+This script was written to allow better exploiting the possibilities of 
+DKIM in Exim.
 
 In the version 4.88 of Exim, available in the time of writing this script,
 EXIM supports the DKIM standard for email authentication, which is very
 helpful in preventing spam, forgery, and abuse. However, the potential of
-DKIM is not fully exploited in Exim, because it only tests DKIM singatures
+DKIM is not fully exploited in Exim, because it only tests DKIM signatures
 present in the respective email message. It does not query the DNS at
 every sender to try finding out whether the domain owner requires all
 messages to be signed or not. It means, in stock Exim (as far as I could
@@ -32,24 +32,23 @@ to Perl on the first line of the script).
 
 This utility is just a quick intermittent solution allowing the rejection
 of unsigned messages. I suppose that later version of Exim will have
-such functionality buit in. However, the script may be useful also for
+such functionality built in. However, the script may be useful also for
 other purposes, including quick manual or automated testing of DNS DKIM
 settings.
 
 Administrators with busy servers should be aware that calling the script
-at every email will add processing time and bandwith usage for the
+at every email will add processing time and bandwidth usage for the
 additional DNS queries.
 
 
 Installation:
 -------------
 
-Uncompress the distribution package and place the dkim_policy.pl to some
+Unzip the distribution package and place the dkim_policy.pl to some
 location on your server (avoid publicly accessible folders such as the www
-tree), and turn on the execution permision bit on he file. On some platforms
+tree), and turn on the execution permission bit on the file. On some platforms
 you may need to change the path to Perl on the first line of the script. In
-doubts about the right path, consult other functionin Perl scripts on your
-machine.
+doubts about the right path, consult other Perl scripts on your machine.
 
 
 Required:
@@ -59,16 +58,16 @@ Required:
 
 In case the modules are not installed on your system, you can add them in
 the following way from command line:
-
-`cpan install Mail::DKIM`
-
-`cpan install Getopt::Long`
+```
+ cpan install Mail::DKIM
+ cpan install Getopt::Long
+```
 
 
 Examples of use:
 ----------------
 
-The script self prints out the following usage information when invoked with:
+The script prints out the following usage information when invoked with:
 
 `./dkim_policy.pl -h`
 
@@ -84,45 +83,46 @@ The script self prints out the following usage information when invoked with:
 
   In the default simple mode, the script returns 0 (success) if any of the DK/DKIM/ADSP
   policies requires all messages to be signed. In all other cases (no policy defined, or
-  allowing some messages without singatures), the return value is 1 (error).
+  allowing some messages without signatures), the return value is 1 (error).
 
   In the detailed mode, the script returns DK/DKIM/ADSP policies as found in the DNS.
 ```
 
-You can use the tool for polling signing policies manually in the folowing way:
+You can use the tool for polling signing policies manually in the following way:
 
 `./dkim_policy.pl -d somedomain.com`
 
-It may be usefull also for other purposes, but originally it was written to help
-Exim rejecting unsigned email from domains that enfore the use of DKIM. Below, you
-can find a sample section of an Exim configuration file, demonstrating the use of
-the built-in DKIM function together with the dkim_policy script.
+It may be useful also for other purposes, but originally it was written to help 
+Exim rejecting unsigned email from domains that declare the use of DKIM on all messages. 
+Below, you can find a sample section of an Exim configuration file, demonstrating the 
+use of the built-in DKIM function together with the dkim_policy script.
 
-First of all, we have to enable the DKIM ACL for every message, regardless whether
-it is signed or not. We can achieve it with the following global parameter at the
-beginning of the Exim configuration file
+First of all, we have to enable the DKIM ACL for every message, regardless whether 
+it is signed or not. We can achieve it with the following global parameter at the 
+beginning of the Exim configuration file:
 
 `dkim_verify_signers = $sender_address_domain`
 
-Personally, I only base the reject decision on senders' DKIM, so testing
-$sender_address_domain is all I need. If you want to test all DKIM singatures
-of every message, you's need to append ':$dkim_singers'.
+Personally, I only base the reject decision on senders' DKIM, so testing 
+$sender_address_domain is all I need. If you want to test all DKIM signatures 
+of every message (in case of multiple DKIM's in a message), you need to append 
+':$dkim_singers'.
 
-Then, you also need to disable the DKIM control for authorized users, trusted
-relays, and for some other cases, with 'control = dkim_disable_verify'. This
+Then, you also need to disable the DKIM control for authorized users, trusted 
+relays, and for some other cases, with 'control = dkim_disable_verify'. This 
 is well covered in most Exim DKIM Howto's.
 
-The DKIM ACL block below works with some previously defined domain lists.
-Namely the $dkim_domains list (for important well known and often abused
-domains, like those of Gmail, Paypal, many banks, etc.), and $local_domains,
-where I store all domain names served by my server. It is up to you whether
-you populate the list from a flat file with lsearch, use a database, or fill
+The DKIM ACL block below works with some previously defined domain lists. 
+Namely the $dkim_domains list (for important well known and often abused 
+domains, like those of Gmail, Paypal, many banks, etc.), and $local_domains, 
+where I store all domain names served by my server. It is up to you whether 
+you populate the list from a flat file with lsearch, use a database, or fill 
 them manually.
 
-The configuration section is well commented, so read through it, remove or
-add comments, and adjust it to suit your needs. The use of the dkim_policy
-script is demonstrated at the bottom of the section, where it helps denying
-unsigned messages from senders who's DNS records claim all messages to be
+The configuration section is well commented, so read through it, remove or 
+add comments, and adjust it to suit your needs. The use of the dkim_policy 
+script is demonstrated at the bottom of the section, where it helps denying 
+unsigned messages from senders who's DNS records claim all messages to be 
 signed.
 
 In the case the script call fails, the shell returns error (1), and Exim will
