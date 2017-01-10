@@ -28,15 +28,16 @@ my $u1 = "\ndkim_policy.pl  DKIM Policy Checker v".$version." (".$verdate.")    
          "  Written by Ivo Truxa (c) 2017 <truxa\@truxoft.com>                                   \n";
 my $u2 = "  usage: dkim-policy.pl [options...] FQDN                                              \n".
          "     Otions:                                                                           \n".
-         "        -d, --details     display a detailed verbose output instead of a simple result \n".
-         "        -c, --changelog   display version history and exit                             \n".
-         "        -v, --version     display version number and exit                              \n".
+         "        -d, --details     display a detailed verbose output                            \n".
+         "        -c, --changelog   display the version history and exit                         \n".
+         "        -v, --version     display the version number and exit                          \n".
          "        -h, --help        showing this information                                     \n\n".
          "     FQDN                 Fully Qualified Domain Name to be tested                     \n\n".
-         "  In the default simple mode, the script returns 0 (success) if any of DK/DKIM/ADSP    \n".
-         "  policies requires all messages to be signed. In all other cases (no policy defined,  \n".
-         "  or allowing some messages without singatures), the return value is 1 (error).        \n\n".
-         "  In the detailed mode, the script returns DK/DKIM/ADSP policies as found in the DNS.  \n";
+         "  In the default simple mode, the script returns 'all' and the return code 0 (success) \n".
+         "  when any of DK/DKIM/ADSP policies require all messages to be signed. In all other    \n".
+         "  cases (no policy defined, or allowing some messages without signatures), the return  \n".
+         "  code is 1 (error), and the return string is 'some/undef'. In the detailed mode, the  \n".
+         "  script returns DK/DKIM/ADSP policies as found in the DNS.                            \n";
 my $changelog =
 "  1.02 [Ivo Truxa] 2017/01/10                                                                   \n".
 "       - return code 0 (enforced) or 1 (undefined) kept, but STDOUT prints a verbose result     \n".
