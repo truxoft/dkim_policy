@@ -25,6 +25,7 @@ my $verdate = "2017-01-10";
 # ---------------------------------------------------------------------
 
 my $u1 = "\ndkim_policy.pl  DKIM Policy Checker v".$version." (".$verdate.")                     \n".
+         "  DNS Query of DKIM signing policies (DK/DKIM/ADSP) of a given domain                  \n".
          "  Written by Ivo Truxa (c) 2017 <truxa\@truxoft.com>                                   \n";
 my $u2 = "  usage: dkim-policy.pl [options...] FQDN                                              \n".
          "     Otions:                                                                           \n".
@@ -106,7 +107,7 @@ if ($domain)
 }
  else
 {
-  myend("No domain name given!\n\n$u2");
+  myend("$u1\n>>> ERROR: No domain name given! <<<\n\n$u2");
 }
 
 exit $result;
