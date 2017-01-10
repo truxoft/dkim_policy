@@ -101,7 +101,7 @@ if ($domain)
   if ($opts{'details'})
        {print "\nResult: ";
         print $result ? "DKIM undefined or unenforced\n\n" : "DKIM enforced\n\n";}
-  else {print $result ? "some/undef" : "all";}
+  else {print $result ? "some/undef " : "all ";}
 }
  else
 {
