@@ -3,6 +3,19 @@ dkim_policy
 
 #### Query DKIM signing policies of a domain
 
+2016/01/11 NOTE:
+
+### Native Solution for Exim
+
+Although the dkim_policy Perl script is useful for manual testing, and 
+has some advantages for the use in Exim, I finally managed to replicate 
+very similar functionality with using just native Exim commands (namely
+the dnsdb() directive). For most Exim administrators, the native version
+of DKIM policy checking is more acceptable. Please find the native 
+solution in the file EXIM.conf in this package.
+
+### Perl Script
+
 This script was written to allow better exploiting the possibilities of 
 DKIM in Exim.
 
