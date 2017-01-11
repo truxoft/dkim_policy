@@ -1,12 +1,12 @@
 CHANGELOG for the dkim_policy.pl script
 ========================================
 
-The changes can be also viewed by running the script on the command line.
-with the option --changelog.
-
-dkim_policy.pl  DKIM Policy Checker v1.02 (2017-01-10)
+dkim_policy.pl  DKIM Policy Checker v1.03 (2017-01-11)
+  DNS Query of DKIM signing policies (DK/DKIM/ADSP) of a given domain
   Written by Ivo Truxa (c) 2017 <truxa@truxoft.com>
 
+  1.03 [Ivo Truxa] 2017/01/11
+       - added other forgotten policy strings (o=!, dkim=all, dkim=discardable)
   1.02 [Ivo Truxa] 2017/01/10
        - return code 0 (enforced) or 1 (undefined) kept, but STDOUT prints a verbose result
   1.01 [Ivo Truxa] 2017/01/09
