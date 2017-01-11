@@ -3,8 +3,8 @@
 # Ivo Truxa  (c) 2017  <truxa@truxoft.com>
 
 # ------- VERSION -----------------------------------------------------
-my $version = "1.02";
-my $verdate = "2017-01-10";
+my $version = "1.03";
+my $verdate = "2017-01-11";
 
 # ------ PURPOSE ------------------------------------------------------
 # The purpose of the script is returning of one of the available DKIM
@@ -40,6 +40,8 @@ my $u2 = "  usage: dkim-policy.pl [options...] FQDN                             
          "  code is 1 (error), and the return string is 'some/undef'. In the detailed mode, the  \n".
          "  script returns DK/DKIM/ADSP policies as found in the DNS.                            \n";
 my $changelog =
+"  1.03 [Ivo Truxa] 2017/01/11                                                                   \n".
+"       - added other forgotten policy strings (o=!, dkim=all, dkim=discardable)                 \n".
 "  1.02 [Ivo Truxa] 2017/01/10                                                                   \n".
 "       - return code 0 (enforced) or 1 (undefined) kept, but STDOUT prints a verbose result     \n".
 "  1.01 [Ivo Truxa] 2017/01/09                                                                   \n".
@@ -93,7 +95,7 @@ if ($domain)
   {
       if ($opts{'details'})
         {print $policy->name() . ": " . $policy->as_string() . "\n";}
-      if ($policy->as_string() =~ "o=-")
+      if ($policy->as_string() =~ "o=-|o=!|dkim=all|dkim=discardable")
         {
          $result = 0;
          if (!$opts{'details'}) {last;}
